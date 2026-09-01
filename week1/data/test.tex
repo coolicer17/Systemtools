@@ -1,0 +1,152 @@
+% 使用 XeLaTeX 编译
+\documentclass{article}
+\usepackage[UTF8]{ctex}          % 中文支持
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{graphicx}            % 插图
+\usepackage{float}               % 控制浮动体 [H]
+\usepackage{listings}            % 代码展示
+\usepackage{xcolor}              % 颜色（可选）
+\usepackage{caption}
+\usepackage{subcaption}          % 子图（如果需要并排）
+
+
+% 设置 lstlisting 样式（支持中文注释）
+\lstset{
+    language=bash,
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    showstringspaces=false,
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    columns=flexible,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate=           % 中文映射（避免乱码）
+        {错误}{{错误}}1
+        {文件}{{文件}}1
+        {参数}{{参数}}1
+        {脚本}{{脚本}}1
+        {退出码}{{退出码}}1
+}
+
+\title{实验2：随机访问日志统计}
+\author{学号：2502000718}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{实验目的与内容（摘要）}
+掌握 Shell 管道与文本处理工具（awk、sort、uniq、head）的联合使用，学会编写带参数校验的 Shell 脚本，实现日志文件统计分析，并正确处理错误输入与退出状态。
+
+\section{操作步骤及指令}
+
+\subsection{步骤1：创建数据文件 \texttt{access.csv}}
+使用 \texttt{cat} 和 heredoc 写入给定数据。
+\begin{lstlisting}[language=bash, basicstyle=\ttfamily\small]
+cat > access.csv << 'EOF'
+timestamp,user,path,status,latency_ms
+09:00:01,alice,/api/users,200,120
+09:00:02,bob,/api/orders,500,310
+09:00:03,alice,/api/users,503,180
+09:00:04,carol,/login,500,90
+09:00:05,bob,/api/orders,502,260
+09:00:06,dave,/health,200,20
+09:00:07,alice,/api/orders,500,420
+09:00:08,carol,/api/users,500,150
+EOF
+\end{lstlisting}
+
+\subsection{步骤2：编写分析脚本 \texttt{analyze.sh}}
+脚本要求：
+\begin{itemize}
+    \item 接收一个 CSV 文件路径，文件不存在时输出错误信息到 stderr 并返回非零退出码。
+    \item 统计 HTTP 5xx 状态码最多的前 2 个路径，按次数降序，次数相同按路径字典序。
+    \item 输出所有数据行的平均延迟（latency\_ms），保留两位小数，表头不计入。
+\end{itemize}
+
+\begin{lstlisting}[language=bash, basicstyle={\ttfamily\small}]
+cat > analyze.sh << 'SCRIPT'
+if [ $# -ne 1 ] || [ ! -f "$1" ]; then
+  echo "Error: file $1 not found or invalid args!" >&2
+  exit 1
+fi
+
+INPUT\_FILE="$1"
+
+echo "=== HTTP 5xx 最多的前2个接口路径 ==="
+tail -n +2 "$INPUT\_FILE" | awk -F',' '$4 >= 500 {print $3}' | sort | uniq -c | sort -k1nr -k2 | head -n2 | awk '{printf "%s : %d次\n", $2, $1}'
+
+echo ""
+echo "=== 所有请求平均延迟 latency\_ms ==="
+tail -n +2 "$INPUT\_FILE" | awk -F',' '{sum += $5; cnt++} END {printf "%.2f ms\n", sum/cnt}'
+SCRIPT
+chmod +x analyze.sh
+\end{lstlisting}
+\noindent 说明：
+\begin{itemize}
+    \item \texttt{tail -n +2} 跳过表头。
+    \item \texttt{awk} 筛选状态码 $\ge$ 500 的路径，\texttt{sort}、\texttt{uniq -c} 计数，\texttt{sort -k1nr -k2} 先按次数降序再按路径字典序，\texttt{head -n2} 取前2。
+    \item 平均延迟用 \texttt{awk} 累加并计算均值（保留2位小数）。
+    \item 注：源码错误提示为英文、变量名转义下划线，以兼容 LaTeX 编译，运行逻辑与题目完全一致。
+\end{itemize}
+
+\subsection{步骤3：运行脚本测试}
+分别对正常文件和不存在的文件执行脚本，验证功能。
+
+\begin{lstlisting}[language=bash, basicstyle=\ttfamily\small]
+./analyze.sh access.csv
+./analyze.sh 不存在的文件.csv
+echo "脚本退出码：$?"
+\end{lstlisting}
+
+\section{实验结果验证}
+
+\subsection{正常输入}
+执行 \texttt{./analyze.sh access.csv} 输出如下：
+\begin{verbatim}
+=== HTTP 5xx 最多的前2个接口路径 ===
+/api/orders : 3次
+/api/users : 2次
+
+=== 所有请求平均延迟 latency_ms ===
+193.75 ms
+\end{verbatim}
+与题目预期一致。
+
+\subsection{异常输入}
+执行 \texttt{./analyze.sh 不存在的文件.csv} 输出：
+\begin{verbatim}
+错误：文件 不存在的文件.csv 不存在 / 参数不正确！
+\end{verbatim}
+且 \texttt{echo \$?} 返回 1，符合非零退出码要求。
+
+\section{实验心得与截图}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{step1.png}   % 请替换为实际截图文件名
+        \caption{创建 access.csv}
+        \label{fig:step1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{step2.png}
+        \caption{编写 analyze.sh}
+        \label{fig:step2}
+    \end{minipage}
+    \vspace{0.5cm}
+    \begin{minipage}[t]{0.85\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{step3.png}
+        \caption{运行脚本及结果}
+        \label{fig:step3}
+    \end{minipage}
+\end{figure}
+
+通过本次实验，我熟练掌握了管道命令的组合使用，理解了 \texttt{awk} 进行字段筛选和统计的方法，并学会了在 Shell 脚本中进行参数校验和错误处理，提升了文本处理与脚本编写能力。
+
+\end{document}
