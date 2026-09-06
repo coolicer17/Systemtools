@@ -1,0 +1,130 @@
+% 使用 ctexart 文档类，支持中文
+\documentclass[12pt, a4paper]{ctexart}
+
+% ========== 导言区：引入宏包并进行设置 ==========
+\usepackage{geometry} % 用于设置页边距
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+\usepackage{graphicx} % 用于插入图片
+\usepackage{float}    % 用于控制图片位置 [H]
+\usepackage{caption}  % 用于自定义图表标题
+\usepackage{amsmath, amssymb} % 用于数学公式
+\usepackage{listings} % 用于插入代码
+\usepackage{xcolor}   % 用于代码高亮颜色
+
+% 设置代码块样式
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    breaklines=true,
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single,
+    tabsize=4
+}
+
+% 设置图表标题格式
+\captionsetup[figure]{name=图, labelsep=period}
+\captionsetup[table]{name=表, labelsep=period}
+
+% ========== 正文开始 ==========
+\begin{document}
+
+% --- 标题与作者信息 ---
+\begin{center}
+    {\huge \textbf{Week2 }} \\[0.5cm]
+    {\large 命令行环境；开发环境与工具；Debugging and Profiling} \\
+    {\large 姓名：赵均临 \quad 学号：25020007178} \\
+    {\large 日期：\today}
+\end{center}
+\vspace{0.5cm}
+
+% --- 目录 ---
+\tableofcontents
+\newpage
+
+% --- 第一章：课上实验题目 ---
+\section{课上实验题目}
+\subsection{实验5：控制一个可清理的后台任务}
+详细描述你所使用的理论或算法。
+例如，一个行内公式：$E = mc^2$。
+\begin{lstlisting}[language=Python]
+import numpy as np
+\%
+print("Hello World")
+\end{lstlisting}
+
+
+
+
+\subsection{实验6：语义重构与本地开发反馈}
+介绍你的实验设计或系统架构。
+可以插入一张图片，例如：
+\begin{figure}[H] % [H] 表示图片固定在此处
+    \centering
+    \includegraphics[width=0.7\textwidth]{example-image} % 请替换为你的图片文件名
+    \caption{系统架构图}
+    \label{fig:system}
+\end{figure}
+
+\subsection{实验7：用调试器定位归并排序缺陷}
+介绍你的实验设计或系统架构。
+可以插入一张图片，例如：
+\begin{figure}[H] % [H] 表示图片固定在此处
+    \centering
+    \includegraphics[width=0.7\textwidth]{example-image} % 请替换为你的图片文件名
+    \caption{系统架构图}
+    \label{fig:system}
+\end{figure}
+
+
+\subsection{实验8：先测量，再优化慢速词频程序}
+介绍你的实验设计或系统架构。
+可以插入一张图片，例如：
+\begin{figure}[H] % [H] 表示图片固定在此处
+    \centering
+    \includegraphics[width=0.7\textwidth]{example-image} % 请替换为你的图片文件名
+    \caption{系统架构图}
+    \label{fig:system}
+\end{figure}
+
+% --- 第二章：练习 ---
+\section{练习：}
+\subsection{实验环境}
+介绍实验的软硬件环境。
+
+\subsection{结果分析}
+对实验结果进行分析。
+也可以插入一个表格：
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        模型 & 准确率 & 召回率 \\
+        \hline
+        模型A & 95.2\% & 94.8\% \\
+        模型B & 97.1\% & 96.5\% \\
+        \hline
+    \end{tabular}
+    \caption{不同模型的性能对比}
+    \label{tab:performance}
+\end{table}
+
+这是一个独立公式的例子：
+\begin{equation}
+    \label{eq:loss}
+    \mathcal{L} = -\frac{1}{N}\sum_{i=1}^{N} \log p(y_i | x_i)
+\end{equation}
+
+% --- 第三章：练习 ---
+\section{练习：}
+\subsection{填充}
+
+
+% --- 第四章：实验心得 ---
+\section{实验心得}
+总结全文，并指出未来可以改进的方向。
+
+\end{document}
