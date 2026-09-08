@@ -7,4 +7,9 @@
 
 - [x] [第二周](week2)：命令行环境；开发环境与工具；Debugging and Profiling；课后练习及实验报告 
     - [第二周实验报告](week2/main.2.pdf)
-    - [第二周实验报告LaTex原项目](week1/main.2.tex)
+    - [第二周实验报告LaTex原项目](week2/main.2.tex)
+     
+  - [x] [第三周](week3)：Packaging and Shipping Code；智能体编程；不止于代码；Python 与PyTorch；课后练习及实验报告 
+    - [第二周实验报告](week2/data/main.3.pdf)
+    - [第二周实验报告LaTex原项目](week3/data/main.3.tex)
+
