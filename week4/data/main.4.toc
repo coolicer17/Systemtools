@@ -1,0 +1,36 @@
+\contentsline {section}{\numberline {1}课上实验题目}{3}{}%
+\contentsline {subsection}{\numberline {1.1}实验13：建立可执行的本地质量门禁}{3}{}%
+\contentsline {subsubsection}{\numberline {1.1.1}实验目的}{3}{}%
+\contentsline {subsubsection}{\numberline {1.1.2}实验环境}{3}{}%
+\contentsline {subsubsection}{\numberline {1.1.3}实验步骤}{3}{}%
+\contentsline {subsubsection}{\numberline {1.1.4}实验结果}{5}{}%
+\contentsline {subsection}{\numberline {1.2}实验14：让MAKE只重建真正受影响的产物}{6}{}%
+\contentsline {subsubsection}{\numberline {1.2.1}实验目的}{6}{}%
+\contentsline {subsubsection}{\numberline {1.2.2}依赖关系梳理}{6}{}%
+\contentsline {subsubsection}{\numberline {1.2.3}实验实现}{6}{}%
+\contentsline {subsection}{\numberline {1.3}实验15：把本地API数据转换为可读报告}{7}{}%
+\contentsline {subsubsection}{\numberline {1.3.1}实验目的}{7}{}%
+\contentsline {subsubsection}{\numberline {1.3.2}核心逻辑设计}{7}{}%
+\contentsline {subsubsection}{\numberline {1.3.3}核心代码片段}{7}{}%
+\contentsline {subsubsection}{\numberline {1.3.4}完整生成脚本}{7}{}%
+\contentsline {subsubsection}{\numberline {1.3.5}验证结果}{8}{}%
+\contentsline {subsubsection}{\numberline {1.3.6}扩展说明}{8}{}%
+\contentsline {subsection}{\numberline {1.4}实验16：修复并交付一个小型的陌生仓库}{8}{}%
+\contentsline {subsubsection}{\numberline {1.4.1}实验目的}{8}{}%
+\contentsline {subsubsection}{\numberline {1.4.2}操作流程}{8}{}%
+\contentsline {subsubsection}{\numberline {1.4.3}Git提交记录}{10}{}%
+\contentsline {subsubsection}{\numberline {1.4.4}踩坑总结}{10}{}%
+\contentsline {section}{\numberline {2}练习}{11}{}%
+\contentsline {subsection}{\numberline {2.1}代码质量与自动化测试}{11}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}配置格式化器、linter 和 pre-commit 钩子}{11}{}%
+\contentsline {subsubsection}{\numberline {2.1.2}编写单元测试并生成覆盖率报告}{11}{}%
+\contentsline {subsubsection}{\numberline {2.1.3}设置持续集成（CI）}{12}{}%
+\contentsline {subsubsection}{\numberline {2.1.4}使用 grep 和 semgrep 查找危险代码}{12}{}%
+\contentsline {subsection}{\numberline {2.2}正则表达式与元编程}{12}{}%
+\contentsline {subsubsection}{\numberline {2.2.1}IDE 正则表达式替换 Markdown 符号}{12}{}%
+\contentsline {subsubsection}{\numberline {2.2.2}正则提取 JSON 中的 name 并修复贪婪匹配}{12}{}%
+\contentsline {subsubsection}{\numberline {2.2.3}使用 JSON 解析器提取 name}{13}{}%
+\contentsline {subsection}{\numberline {2.3}构建系统与 Git 钩子}{13}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}Makefile 实现 clean 伪目标}{13}{}%
+\contentsline {subsubsection}{\numberline {2.3.2}Git pre-commit 钩子拒绝构建失败}{13}{}%
+\contentsline {subsubsection}{\numberline {2.3.3}GitHub Action 检查 shell 和 markdown}{13}{}%
